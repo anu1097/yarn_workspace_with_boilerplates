@@ -1,0 +1,8 @@
+{
+	"editor.insertSpaces": false,
+	"editor.formatOnSave": true, // only if you want auto fomattting on saving the file
+	"editor.detectIndentation": false,
+	"editor.codeActionsOnSave": {
+		"source.fixAll.tslint": true
+	}
+}

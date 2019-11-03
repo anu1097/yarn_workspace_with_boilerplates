@@ -1,0 +1,14 @@
+{
+    "defaultSeverity": "error",
+    "extends": [
+        "tslint:recommended"
+    ],
+    "jsRules": {},
+    "rules": {
+			"no-console":true,
+			"no-trailing-whitespace":true,
+			"no-unused-variable":true,
+			"indent":[true, "tabs", 2]
+		},
+    "rulesDirectory": []
+}
