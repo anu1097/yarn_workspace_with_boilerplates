@@ -5,10 +5,13 @@
     ],
     "jsRules": {},
     "rules": {
-			"no-console":true,
+			"indent":[true, "tabs", 2],
+			"interface-name": false,	
+			"member-access": false,	
 			"no-trailing-whitespace":true,
-			"no-unused-variable":true,
-			"indent":[true, "tabs", 2]
+			"no-console": true,	
+			"no-submodule-imports": false,
+			"object-literal-sort-keys": false	
 		},
     "rulesDirectory": []
 }
