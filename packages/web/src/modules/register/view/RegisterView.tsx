@@ -1,7 +1,8 @@
 import { userValidationSchema } from "@model/common";
-import { Button, Form, Icon, Input } from "antd";
-import { Formik, FormikErrors } from "formik";
+import { Button, Form, Icon } from "antd";
+import { Field, Form as FormikForm, Formik, FormikErrors } from "formik";
 import * as React from "react";
+import { InputField } from "../../shared/inputField";
 import "./register.css";
 
 const FormItem = Form.Item;
@@ -15,7 +16,7 @@ interface Props {
 	submit: (values: FormValues) => Promise<FormikErrors<FormValues> | null>;
 }
 
-export const RegisterView: React.FC<Props> = ({submit}) => {
+export const RegisterView: React.FC<Props> = ({ submit }) => {
 	return (
 		<Formik
 			initialValues={{
@@ -26,46 +27,27 @@ export const RegisterView: React.FC<Props> = ({submit}) => {
 			onSubmit={submit}
 		>
 			{(props) => {
-				const { values, errors, handleSubmit, handleChange, touched, handleBlur } = props;
 				return (
-
-					<form onSubmit={handleSubmit} className="registerPage">
+					<FormikForm className="registerPage">
 						<h1 className="formItemCenter">Register Page</h1>
 						<div>
-							<FormItem
-								help={touched.email && errors.email ? errors.email : ""}
-								validateStatus={touched.email && errors.email ? "error" : undefined}
-							>
-								<Input
-									name="email"
-									prefix={<Icon type="user" style={{ color: "rgba(0,0,0,.25)" }} />}
-									placeholder="Email"
-									value={values.email}
-									onChange={handleChange}
-									onBlur={handleBlur}
-								/>
-							</FormItem>
-							<FormItem
-								help={touched.password && errors.password ? errors.password : ""}
-								// tslint:disable-next-line:jsx-no-multiline-js
-								validateStatus={
-									touched.password && errors.password ? "error" : undefined
-								}
-							>
-								<Input
-									name="password"
-									prefix={<Icon type="lock" style={{ color: "rgba(0,0,0,.25)" }} />}
-									type="password"
-									placeholder="Password"
-									value={values.password}
-									onChange={handleChange}
-									onBlur={handleBlur}
-								/>
-							</FormItem>
+							<Field
+								name="email"
+								prefix={<Icon type="user" style={{ color: "rgba(0,0,0,.25)" }} />}
+								component={InputField}
+								placeholder="Email"
+							/>
+							<Field
+								name="password"
+								prefix={<Icon type="lock" style={{ color: "rgba(0,0,0,.25)" }} />}
+								type="password"
+								placeholder="Password"
+								component={InputField}
+							/>
 							<FormItem>
 								<a className="formItemRight" href="/forgotPassword">
 									Forgot password
-									</a>
+								</a>
 							</FormItem>
 							<FormItem>
 								<Button
@@ -74,13 +56,13 @@ export const RegisterView: React.FC<Props> = ({submit}) => {
 									className="login-form-button"
 								>
 									Register
-									</Button>
+								</Button>
 							</FormItem>
 							<FormItem className="formItemRight">
 								Or <a href="/login">login now!</a>
 							</FormItem>
 						</div>
-					</form>
+					</FormikForm>
 				);
 			}}
 		</Formik >
