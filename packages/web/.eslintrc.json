@@ -1,0 +1,38 @@
+{
+	"env": {
+		"browser": true,
+		"es6": true
+	},
+	"extends": [
+		"airbnb"
+	],
+	"globals": {
+		"Atomics": "readonly",
+		"SharedArrayBuffer": "readonly"
+	},
+	"parser": "@typescript-eslint/parser",
+	"parserOptions": {
+		"ecmaFeatures": {
+			"jsx": true
+		},
+		"ecmaVersion": 2018,
+		"sourceType": "module"
+	},
+	"plugins": [
+		"react",
+		"@typescript-eslint"
+	],
+	"rules": {
+		"indent": [
+			true,
+			"tabs",
+			2
+		],
+		"interface-name": false,
+		"member-access": false,
+		"no-trailing-whitespace": true,
+		"no-console": 1,
+		"no-submodule-imports": false,
+		"object-literal-sort-keys": false
+	}
+}

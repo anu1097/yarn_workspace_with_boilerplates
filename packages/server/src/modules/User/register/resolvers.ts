@@ -1,23 +1,17 @@
-import * as yup from "yup";
+import {userValidationSchema} from "@model/common";
 import { User } from "../../../entity/User";
 import { IResolverMap } from "../../../types/graphql-utils";
 import { GQL } from "../../../types/schema";
 import { formatYupError } from "../../../utils/formatYupError";
 import { sendConfirmationEmail } from "../../../utils/sendConfirmationEmail";
 import { createEmailConfirmationLink } from "../../../utils/utils";
-import { registerEmailSchema, registerPasswordSchema } from "../../../utils/yupSchemas";
 import { duplicateEmail } from "./errorMessages";
-
-const validateSchema = yup.object().shape({
-	email: registerEmailSchema,
-	password: registerPasswordSchema,
-});
 
 export const resolvers: IResolverMap = {
 	Mutation: {
 		register: async (_, args: GQL.IRegisterOnMutationArguments, { redis, url }) => {
 			try {
-				await validateSchema.validate(args, { abortEarly: false });
+				await userValidationSchema.validate(args, { abortEarly: false });
 			} catch (err) {
 				return formatYupError(err);
 			}

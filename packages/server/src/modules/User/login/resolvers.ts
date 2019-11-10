@@ -1,18 +1,11 @@
+import {userValidationSchema} from "@model/common";
 import * as bcrypt from "bcrypt";
-import * as yup from "yup";
 import { User } from "../../../entity/User";
 import { IResolverMap } from "../../../types/graphql-utils";
 import { GQL } from "../../../types/schema";
-import { INVALID_EMAIL } from "../../../utils/commonErrors";
 import { USER_SESSION_ID_PREFIX } from "../../../utils/constants";
 import { formatYupError } from "../../../utils/formatYupError";
-import { registerEmailSchema, registerPasswordSchema } from "../../../utils/yupSchemas";
 import { accountLockedError, emailConfirmError, invalidLogin } from "./errorMessages";
-
-const validateSchema = yup.object().shape({
-	email: registerEmailSchema,
-	password: registerPasswordSchema,
-});
 
 const errorResponse = (error) => {
 	return [{
@@ -33,7 +26,7 @@ export const resolvers: IResolverMap = {
 		) => {
 			const { session } = req;
 			try {
-				await validateSchema.validate(args, { abortEarly: false });
+				await userValidationSchema.validate(args, { abortEarly: false });
 			} catch (err) {
 				return formatYupError(err);
 			}

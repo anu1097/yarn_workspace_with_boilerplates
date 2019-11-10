@@ -1,5 +1,4 @@
 import { startServer } from "./../startServer";
-import { createTypeormConnection } from "./../utils/utils";
 
 export const globalJestSetup = async () => {
 	if (!process.env.TEST_HOST) {

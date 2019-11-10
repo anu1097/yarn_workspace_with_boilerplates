@@ -1,7 +1,7 @@
+import { EMAIL_NOT_LONG_ENOUGH, INVALID_EMAIL, PASSWORD_NOT_LONG_ENOUGH } from "@model/common";
 import * as faker from "faker";
 import { Connection } from "typeorm";
 import { User } from "../../../entity/User";
-import { EMAIL_NOT_LONG_ENOUGH, INVALID_EMAIL, PASSWORD_NOT_LONG_ENOUGH } from "../../../utils/commonErrors";
 import { TestClient } from "../../../utils/testClientUtil";
 import { createTypeormConnection } from "../../../utils/utils";
 import { duplicateEmail } from "./errorMessages";

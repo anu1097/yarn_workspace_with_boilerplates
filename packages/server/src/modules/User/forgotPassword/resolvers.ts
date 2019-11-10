@@ -1,3 +1,4 @@
+import { registerPasswordSchema } from "@model/common";
 import * as bcrypt from "bcrypt";
 import * as yup from "yup";
 import { User } from "../../../entity/User";
@@ -7,7 +8,6 @@ import { EXPIRED_KEY_ERROR } from "../../../utils/commonErrors";
 import { FORGOT_PASSWORD_PREFIX } from "../../../utils/constants";
 import { formatYupError } from "../../../utils/formatYupError";
 import { createForgotPasswordLink, removeAllUsersSession } from "../../../utils/utils";
-import { registerPasswordSchema } from "../../../utils/yupSchemas";
 import { USER_NOT_FOUND } from "./errorMessages";
 
 const validateSchema = yup.object().shape({

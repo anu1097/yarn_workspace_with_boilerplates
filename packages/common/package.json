@@ -1,0 +1,21 @@
+{
+  "name": "@model/common",
+  "version": "1.0.0",
+  "description": "Common Utility package for a Model App",
+	"main": "dist/index.js",
+	"typings": "dist/indext.d.ts",
+  "author": "Anuraag",
+	"license": "MIT",
+	"scripts": {
+		"build": "rm -rf ./dist && tsc"
+	},
+  "dependencies": {
+    "yup": "^0.27.0"
+  },
+  "devDependencies": {
+    "@types/yup": "^0.26.24",
+    "tslint": "^6.0.0-beta0",
+    "tslint-config-prettier": "^1.18.0",
+    "typescript": "^3.6.4"
+  }
+}

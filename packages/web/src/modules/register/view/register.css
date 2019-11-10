@@ -1,0 +1,15 @@
+.registerPage{
+	display: flex;	
+	width: 300px;
+	margin: auto;
+	flex-direction: column;
+}
+.formItemCenter{
+	align-self: center;
+}
+.formItemRight{
+	float: right;
+}
+.login-form-button {
+	width: 100%;
+}

@@ -1,8 +1,18 @@
 {
+	"eslint.enable": true,
+	"eslint.validate": [
+    "javascript",
+    "javascriptreact",
+    { "language": "typescript", "autoFix": true },
+    { "language": "typescriptreact", "autoFix": true }
+	],
 	"editor.insertSpaces": false,
 	"editor.formatOnSave": true, // only if you want auto fomattting on saving the file
 	"editor.detectIndentation": false,
 	"editor.codeActionsOnSave": {
 		"source.fixAll.tslint": true
-	}
+	},
+	"eslint.workingDirectories":[
+		"./packages/*"
+	]
 }

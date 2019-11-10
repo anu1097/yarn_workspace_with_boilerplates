@@ -1,8 +1,9 @@
+import { PASSWORD_NOT_LONG_ENOUGH } from "@model/common";
 import * as faker from "faker";
 import * as Redis from "ioredis";
 import { Connection } from "typeorm";
 import { User } from "../../../entity/User";
-import { EXPIRED_KEY_ERROR, PASSWORD_NOT_LONG_ENOUGH } from "../../../utils/commonErrors";
+import { EXPIRED_KEY_ERROR } from "../../../utils/commonErrors";
 import { TestClient } from "../../../utils/testClientUtil";
 import { removeAllUsersSession } from "../../../utils/utils";
 import { createForgotPasswordLink, createTypeormConnection } from "../../../utils/utils";
