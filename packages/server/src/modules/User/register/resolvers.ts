@@ -34,10 +34,10 @@ export const resolvers: IResolverMap = {
 			}).save();
 
 			// if (process.env.NODE_ENV !== "test") {
-			//   await sendConfirmationEmail(
-			//     email,
-			//     await createEmailConfirmationLink(url, user.id, redis)
-			//   );
+			// 	await sendConfirmationEmail(
+			// 		email,
+			// 		await createEmailConfirmationLink(url, user.id, redis),
+			// 	);
 			// }
 			return null;
 		},

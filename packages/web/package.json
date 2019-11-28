@@ -20,7 +20,8 @@
     "react-router-dom": "^5.1.2",
     "react-scripts": "3.2.0",
 		"typescript": "3.6.4",
-		"@model/common": "1.0.0"
+		"@model/common": "1.0.0",
+		"@model/controllers": "1.0.0"
   },
   "scripts": {
     "start": "react-scripts start",
