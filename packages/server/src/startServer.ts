@@ -43,7 +43,7 @@ export const startServer = async () => {
 		}),
 	);
 	server.express.use(
-		(req, res, next) => {
+		(_, res, next) => {
 			res.header("Content-Type", "application/json;charset=UTF-8");
 			res.header("Access-Control-Allow-Credentials");
 			res.header(

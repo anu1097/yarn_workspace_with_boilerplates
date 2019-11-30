@@ -22,7 +22,7 @@ describe("testing registration mutation", () => {
 	const email = faker.internet.email();
 	const password = faker.internet.password();
 	it("registering a user returns correct response", async () => {
-		const response = await testClient.registerClient(email, password);
+		await testClient.registerClient(email, password);
 		const users = await User.find({ where: { email } });
 		expect(users).toHaveLength(1);
 		const user = users[0];

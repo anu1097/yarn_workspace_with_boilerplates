@@ -28,11 +28,6 @@ afterAll(async () => {
 
 const testClient = new TestClient(process.env.TEST_HOST as string);
 
-const loginErrorResponse = async (e, p, errorResponse) => {
-	const response = await testClient.loginClient(e, p);
-	expect(response.data).toEqual({ login: [{ path: "Login", message: errorResponse }] });
-};
-
 const redis = new Redis();
 
 describe("forgot password test", () => {
@@ -42,42 +37,46 @@ describe("forgot password test", () => {
 			where: { email },
 		});
 
-		await removeAllUsersSession(user.id, redis);
-		// user should be logged out now
-		expect(await testClient.meClient()).toEqual({
-			data: {
-				me: null,
-			},
-		});
+		if (user) {
 
-		const url = await createForgotPasswordLink("", user.id, redis);
-		const paredData = url.split("/");
-		const key = paredData[paredData.length - 1];
-		expect(await testClient.forgotPasswordChange("a", key)).toEqual({
-			data: {
+			await removeAllUsersSession(user.id, redis);
+			// user should be logged out now
+			expect(await testClient.meClient()).toEqual({
+				data: {
+					me: null,
+				},
+			});
+
+			const url = await createForgotPasswordLink("", user.id, redis);
+			const paredData = url.split("/");
+			const key = paredData[paredData.length - 1];
+			expect(await testClient.forgotPasswordChange("a", key)).toEqual({
+				data: {
+					forgotPasswordChange: [
+						{
+							message: PASSWORD_NOT_LONG_ENOUGH,
+							path: "newPassword",
+						},
+					],
+				},
+			});
+			expect((await testClient.forgotPasswordChange(newPassword, key)).data).toEqual({
+				forgotPasswordChange: null,
+			});
+			expect((await testClient.forgotPasswordChange("asdasdasdas", key)).data).toEqual({
 				forgotPasswordChange: [
 					{
-						message: PASSWORD_NOT_LONG_ENOUGH,
-						path: "newPassword",
+						message: EXPIRED_KEY_ERROR,
+						path: "key",
 					},
 				],
-			},
-		});
-		expect((await testClient.forgotPasswordChange(newPassword, key)).data).toEqual({
-			forgotPasswordChange: null,
-		});
-		expect((await testClient.forgotPasswordChange("asdasdasdas", key)).data).toEqual({
-			forgotPasswordChange: [
-				{
-					message: EXPIRED_KEY_ERROR,
-					path: "key",
+			});
+			expect(await testClient.loginClient(email, newPassword)).toEqual({
+				data: {
+					login: null,
 				},
-			],
-		});
-		expect(await testClient.loginClient(email, newPassword)).toEqual({
-			data: {
-				login: null,
-			},
-		});
+			});
+
+		}
 	});
 });

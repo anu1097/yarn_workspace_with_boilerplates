@@ -1,0 +1,10 @@
+*
+!./package.json
+!./packages/server/package.json
+!./packages/common/package.json
+!./packages/common/dist
+!./packages/server/dist
+!./packages/server/.env
+!./ormconfig.json
+.dockerignore
+Dockerfile

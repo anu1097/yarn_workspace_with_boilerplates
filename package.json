@@ -1,5 +1,8 @@
 {
   "private": true,
+  "scripts": {
+    "build_server": "lerna run build --scope={@model/common,@model/server}"
+  },
   "workspaces": [
     "packages/*"
   ],
@@ -8,6 +11,8 @@
     "@typescript-eslint/parser": "^2.6.1",
     "eslint": "^6.6.0",
     "eslint-config-airbnb-base": "^14.0.0",
-    "eslint-plugin-import": "^2.18.2"
-  }
+    "eslint-plugin-import": "^2.18.2",
+    "lerna": "^3.19.0"
+  },
+  "name": "yarn_workspace_with_boilerplates"
 }

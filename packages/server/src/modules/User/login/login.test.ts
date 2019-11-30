@@ -33,7 +33,9 @@ describe("testing login mutation for a valid user", () => {
 		const user = await User.findOne({
 			where: { email },
 		});
-		await loginErrorResponse(email, password, emailConfirmError);
+		if (user) {
+			await loginErrorResponse(email, password, emailConfirmError);
+		}
 	});
 	it("with incorrect password", async () => {
 		await User.update({ email }, { confirmed: true });

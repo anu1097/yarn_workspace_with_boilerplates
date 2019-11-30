@@ -2,7 +2,7 @@ import * as SparkPost from "sparkpost";
 const client = new SparkPost(process.env.SPARKPOST_API_KEY);
 
 export const sendConfirmationEmail = async (recipientEmail: string, url: string) => {
-	const response = await client.transmissions.send({
+	await client.transmissions.send({
 		options: {
 			sandbox: true,
 		},

@@ -1,1 +1,1 @@
-export { RegisterController } from './modules/RegisterController/index';
+export { RegisterController } from "./modules/RegisterController/index";

@@ -18,6 +18,7 @@
       "@types/yup": "^0.26.24",
       "@typescript-eslint/eslint-plugin": "^2.6.0",
       "@typescript-eslint/parser": "^2.6.0",
+      "copyfiles": "^2.1.1",
       "eslint": "^6.6.0",
       "eslint-config-airbnb-base": "^14.0.0",
       "eslint-plugin-import": "^2.18.2",
@@ -54,14 +55,16 @@
       "sparkpost": "^2.1.4",
       "typeorm": "0.2.20",
       "uuid": "^3.3.3",
-			"yup": "^0.27.0",
-			"@model/common": "1.0.0"
+      "yup": "^0.27.0"
    },
    "scripts": {
       "start": "ts-node --files src/index.ts",
       "devServer": "nodemon --exec NODE_ENV=development ts-node --files src/index.ts",
+      "prodServeNodeMon": "nodemon --exec NODE_ENV=production ts-node --files src/index.ts",
       "gen-schema-types": "ts-node src/scripts/createTypeSchema.ts",
-      "test": "NODE_ENV=test jest --watchAll --runInBand"
+      "test": "NODE_ENV=test jest --watchAll --runInBand",
+			"build": "rm -rf ./dist &&  npm run copy && tsc",
+			"copy": "copyfiles -u 1 src/**/*.graphql ./dist"
    },
    "jest": {
       "preset": "ts-jest",

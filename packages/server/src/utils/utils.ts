@@ -6,10 +6,12 @@ import { mergeResolvers, mergeTypes } from "merge-graphql-schemas";
 import * as path from "path";
 import { createConnection, getConnectionOptions } from "typeorm";
 import { v4 } from "uuid";
+import { User } from "./../entity/User";
 import { GraphQlMiddleware, Resolver } from "./../types/graphql-utils";
 import { FORGOT_PASSWORD_PREFIX, REDIS_SESSION_PREFIX, USER_SESSION_ID_PREFIX } from "./constants";
 
-export const getPort = (): number => process.env.NODE_ENV === "test" ? 4001 : 4000;
+const port = process.env.PORT || 4000;
+export const getPort = (): number => process.env.NODE_ENV === "test" ? 4001 : port as number;
 
 export const createEmailConfirmationLink = async (url: string, userId: string, redis: Redis) => {
 	const uuid = v4();
@@ -25,9 +27,16 @@ export const createForgotPasswordLink = async (url: string, userId: string, redi
 
 export const createTypeormConnection = async () => {
 	const connectionOptions = await getConnectionOptions(process.env.NODE_ENV);
-	return createConnection({
-		...connectionOptions, name: "default",
-	});
+	return process.env.NODE_ENV === "production" ?
+		createConnection({
+			...connectionOptions,
+			entities: [User],
+			url: process.env.DATABASE_URL as string,
+			name: "default",
+		} as any) :
+		createConnection({
+			...connectionOptions, name: "default",
+		});
 };
 
 export const createTestConnection = async (resetDB: boolean = false) => {
@@ -70,8 +79,8 @@ export const createMiddleWare = (
 	middleWare: GraphQlMiddleware,
 	resolverFunc: Resolver,
 ) => {
-		return (parent: any, args: any, context: any, info: any) => middleWare(resolverFunc, parent, args, context, info);
-	};
+	return (parent: any, args: any, context: any, info: any) => middleWare(resolverFunc, parent, args, context, info);
+};
 
 export const middleWare = async (
 	resolver: Resolver,
